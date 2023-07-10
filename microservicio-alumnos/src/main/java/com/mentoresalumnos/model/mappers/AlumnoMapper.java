@@ -2,6 +2,7 @@ package com.mentoresalumnos.model.mappers;
 
 import com.mentoresalumnos.model.Alumno;
 import com.mentoresalumnos.model.dtos.AlumnoDTO;
+import com.mentoresalumnos.model.dtos.AlumnoResponse;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
@@ -15,6 +16,6 @@ public interface AlumnoMapper {
     Alumno alumnoDTOToAlumno(AlumnoDTO alumnoDTO);
 
 
-    AlumnoDTO alumnoToAlumnoDTO(Alumno alumno);
+    AlumnoResponse alumnoToAlumnoResponse(Alumno alumno);
 
 }
