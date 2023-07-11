@@ -18,7 +18,5 @@ public class MentorDTO {
 
     private Long edad;
 
-    private Alumno alumno;
-
 
 }
