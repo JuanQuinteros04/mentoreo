@@ -25,7 +25,7 @@ public class Mentor {
     private String apellido;
 
     @Column()
-    private Long edad;
+    private Integer edad;
 
     @Column()
     @ManyToOne

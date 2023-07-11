@@ -16,7 +16,9 @@ public class MentorDTO {
 
     private String apellido;
 
-    private Long edad;
+    private Integer edad;
+
+    private Long alumnoId;
 
 
 }
