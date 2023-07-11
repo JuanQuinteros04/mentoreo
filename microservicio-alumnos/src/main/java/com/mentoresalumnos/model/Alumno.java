@@ -23,13 +23,13 @@ public class Alumno {
     private String apellido;
 
     @Column(name = "edad")
-    private Long edad;
+    private Integer edad;
 
     @Column(name = "nivel")
     private AlumnoNivel alumnoNivel;
 
     @Column(name = "cantidad_mentores")
-    private Long cantidadMentores;
+    private Integer cantidadMentores;
 
     @Column(name = "mentores")
     @OneToMany(fetch = FetchType.LAZY)
