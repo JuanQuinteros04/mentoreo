@@ -39,10 +39,9 @@ public class MentorServiceImpl implements MentorService{
     }
 
     @Override
-    public MentorResponse createMentor(MentorDTO mentorDTO, Long alumnoId) {
+    public MentorResponse createMentor(MentorDTO mentorDTO) {
 
         Mentor mentor = mentorMapper.mentorDTOToMentor(mentorDTO);
-        mentor.setAlumno(alumnoRepository.findById(alumnoId).orElseThrow(NotFoundException::new));
 
         mentorRepository.save(mentor);
 
@@ -72,5 +71,15 @@ public class MentorServiceImpl implements MentorService{
     @Override
     public void deleteMentor(Long id) {
         mentorRepository.delete(mentorRepository.findById(id).orElseThrow(NotFoundException::new));
+    }
+
+    @Override
+    public void addAlumno(Long mentorId, Long alumnoId) {
+        Mentor mentor = mentorRepository.findById(mentorId).orElseThrow(NotFoundException::new);
+        Alumno alumno = alumnoRepository.findById(alumnoId).orElseThrow(NotFoundException::new);
+        mentor.setAlumno(alumno);
+
+        mentorRepository.save(mentor);
+
     }
 }

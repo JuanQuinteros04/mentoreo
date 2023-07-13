@@ -13,10 +13,12 @@ public interface MentorService {
 
     MentorResponse findById(Long id);
 
-    MentorResponse createMentor(MentorDTO mentorDTO, Long alumnoId);
+    MentorResponse createMentor(MentorDTO mentorDTO);
 
     void update(Long id, MentorDTO mentorDTO);
 
     void deleteMentor(Long id);
+
+    void addAlumno(Long mentorId,Long alumnoId);
 
 }
