@@ -13,8 +13,9 @@ public interface MentorMapper {
     MentorMapper INSTANCE = Mappers.getMapper(MentorMapper.class);
 
     @Mapping(target = "id", ignore = true)
+    @Mapping(target = "alumnos", ignore = true)
     Mentor mentorDTOToMentor(MentorDTO mentorDTO);
 
-    @Mapping(target = "alumnoId", source = "alumno.id")
+
     MentorResponse mentorToMentorResponse(Mentor mentor);
 }

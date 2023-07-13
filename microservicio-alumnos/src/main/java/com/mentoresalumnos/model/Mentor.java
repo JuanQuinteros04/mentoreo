@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "mentores")
@@ -16,10 +17,10 @@ import javax.persistence.*;
 public class Mentor {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "nombre", nullable = false)
+    @Column(name = "nombre")
     private String nombre;
 
     @Column(name = "apellido")
@@ -28,8 +29,10 @@ public class Mentor {
     @Column(name = "edad")
     private Integer edad;
 
-    @JoinColumn(name = "alumno", nullable = false)
-    @ManyToOne
-    private Alumno alumno;
+    @Column(name = "tiempo_experiencia")
+    private Integer tiempoExperiencia;
+
+    @ManyToMany(mappedBy = "mentores")
+    private List<Alumno> alumnos;
 
 }

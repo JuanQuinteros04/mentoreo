@@ -18,7 +18,7 @@ public class MentorDTO {
 
     private Integer edad;
 
-    private Long alumnoId;
+    private Integer tiempoExperiencia;
 
 
 }

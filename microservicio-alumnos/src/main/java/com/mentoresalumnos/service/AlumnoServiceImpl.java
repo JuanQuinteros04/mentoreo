@@ -74,9 +74,10 @@ public class AlumnoServiceImpl implements AlumnoService{
     public void addMentor(Long alumnoId ,Long mentorId) {
         Mentor mentor = mentorRepository.findById(mentorId).orElseThrow(NotFoundException::new);
         Alumno alumno = alumnoRepository.findById(alumnoId).orElseThrow(NotFoundException::new);
-        alumno.getMentores().add(mentor);
-        alumno.setCantidadMentores(alumno.getMentores().size());
-        alumnoRepository.save(alumno);
-
+        if(alumno.getMentores().size() < 3){
+            alumno.getMentores().add(mentor);
+            alumno.setCantidadMentores(alumno.getMentores().size());
+            alumnoRepository.save(alumno);
+        }else throw new RuntimeException("El maximo de mentores permitidos es 3. Lo sentimos");
     }
 }

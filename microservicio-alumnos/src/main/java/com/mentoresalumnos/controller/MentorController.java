@@ -1,7 +1,5 @@
 package com.mentoresalumnos.controller;
 
-import com.mentoresalumnos.model.dtos.AlumnoDTO;
-import com.mentoresalumnos.model.dtos.AlumnoResponse;
 import com.mentoresalumnos.model.dtos.MentorDTO;
 import com.mentoresalumnos.model.dtos.MentorResponse;
 import com.mentoresalumnos.service.MentorService;

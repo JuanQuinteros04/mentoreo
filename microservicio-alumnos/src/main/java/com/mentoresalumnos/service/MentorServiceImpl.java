@@ -40,12 +40,10 @@ public class MentorServiceImpl implements MentorService{
 
     @Override
     public MentorResponse createMentor(MentorDTO mentorDTO) {
-
         Mentor mentor = mentorMapper.mentorDTOToMentor(mentorDTO);
-
         mentorRepository.save(mentor);
-
-        return mentorMapper.mentorToMentorResponse(mentor);    }
+        return mentorMapper.mentorToMentorResponse(mentor);
+    }
 
     @Override
     public void update(Long id, MentorDTO mentorDTO) {
@@ -61,10 +59,10 @@ public class MentorServiceImpl implements MentorService{
         if (mentorDTO.getEdad() != null) {
             mentor.setEdad(mentorDTO.getEdad());
         }
-        if (mentorDTO.getAlumnoId() != null) {
-            Alumno alumno = alumnoRepository.findById(mentorDTO.getAlumnoId()).orElseThrow(NotFoundException::new);
-            mentor.setAlumno(alumno);
+        if (mentorDTO.getTiempoExperiencia() != null) {
+            mentor.setTiempoExperiencia(mentorDTO.getTiempoExperiencia());
         }
+
         mentorRepository.save(mentor);
     }
 
@@ -77,9 +75,13 @@ public class MentorServiceImpl implements MentorService{
     public void addAlumno(Long mentorId, Long alumnoId) {
         Mentor mentor = mentorRepository.findById(mentorId).orElseThrow(NotFoundException::new);
         Alumno alumno = alumnoRepository.findById(alumnoId).orElseThrow(NotFoundException::new);
-        mentor.setAlumno(alumno);
 
-        mentorRepository.save(mentor);
+        if(mentor.getAlumnos().size() < 3){
+            mentor.getAlumnos().add(alumno);
+
+            mentorRepository.save(mentor);
+        }else throw new RuntimeException("El limite de alumnos es 3. Lo sentimos.");
+
 
     }
 }
