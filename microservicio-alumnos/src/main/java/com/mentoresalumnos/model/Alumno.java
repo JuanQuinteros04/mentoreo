@@ -6,6 +6,7 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
+@Table(name = "alumnos")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -26,7 +27,7 @@ public class Alumno {
     private Integer edad;
 
     @Column(name = "nivel")
-    private AlumnoNivel alumnoNivel;
+    private String alumnoNivel;
 
     @Column(name = "cantidad_mentores")
     private Integer cantidadMentores;

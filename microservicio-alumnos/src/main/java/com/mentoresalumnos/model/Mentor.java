@@ -8,6 +8,7 @@ import lombok.Setter;
 import javax.persistence.*;
 
 @Entity
+@Table(name = "mentores")
 @Getter
 @Setter
 @AllArgsConstructor
@@ -18,16 +19,16 @@ public class Mentor {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column()
+    @Column(name = "nombre", nullable = false)
     private String nombre;
 
-    @Column()
+    @Column(name = "apellido")
     private String apellido;
 
-    @Column()
+    @Column(name = "edad")
     private Integer edad;
 
-    @Column()
+    @JoinColumn(name = "alumno", nullable = false)
     @ManyToOne
     private Alumno alumno;
 

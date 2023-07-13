@@ -39,7 +39,6 @@ public class AlumnoServiceImpl implements AlumnoService{
     @Override
     public AlumnoResponse createAlumno(AlumnoDTO alumnoDTO) {
         Alumno alumno = alumnoMapper.alumnoDTOToAlumno(alumnoDTO);
-        alumno.setCantidadMentores(alumno.getMentores().size());
         alumnoRepository.save(alumno);
         return alumnoMapper.alumnoToAlumnoResponse(alumno);
     }
@@ -76,6 +75,8 @@ public class AlumnoServiceImpl implements AlumnoService{
         Mentor mentor = mentorRepository.findById(mentorId).orElseThrow(NotFoundException::new);
         Alumno alumno = alumnoRepository.findById(alumnoId).orElseThrow(NotFoundException::new);
         alumno.getMentores().add(mentor);
+        alumno.setCantidadMentores(alumno.getMentores().size());
         alumnoRepository.save(alumno);
+
     }
 }

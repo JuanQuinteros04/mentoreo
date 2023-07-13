@@ -15,6 +15,7 @@ public interface AlumnoMapper {
     @Mapping(target = "id", ignore = true)
     Alumno alumnoDTOToAlumno(AlumnoDTO alumnoDTO);
 
+
     AlumnoResponse alumnoToAlumnoResponse(Alumno alumno);
 
 }

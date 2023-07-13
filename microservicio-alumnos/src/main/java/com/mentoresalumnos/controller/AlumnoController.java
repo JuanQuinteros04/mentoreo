@@ -25,7 +25,7 @@ public class AlumnoController {
     }
 
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<AlumnoResponse> findById(Long id){
+    public ResponseEntity<AlumnoResponse> findById(@PathVariable("id") Long id){
         return ResponseEntity.ok(alumnoService.findById(id));
     }
 
@@ -43,7 +43,7 @@ public class AlumnoController {
         return ResponseEntity.created(location).body(alumnoResponse);
     }
 
-    @PutMapping(value = "{/id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @PutMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Void> update(@PathVariable("id") Long id, @RequestBody AlumnoDTO alumnoDTO){
         alumnoService.update(id, alumnoDTO);
         return ResponseEntity.status(204).build();
@@ -55,7 +55,7 @@ public class AlumnoController {
          return ResponseEntity.status(204).build();
     }
 
-    @PutMapping(value = "{/add/{id}/mentor{idMentor}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @PutMapping(value = "/add/{id}/mentor/{idMentor}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Void> addMentor(@PathVariable("id") Long id, @PathVariable("idMentor") Long idMentor ){
         alumnoService.addMentor(id,idMentor);
         return ResponseEntity.status(204).build();

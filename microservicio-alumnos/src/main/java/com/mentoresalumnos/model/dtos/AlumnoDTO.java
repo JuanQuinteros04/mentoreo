@@ -1,6 +1,5 @@
 package com.mentoresalumnos.model.dtos;
 
-import com.mentoresalumnos.model.AlumnoNivel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,7 +18,7 @@ public class AlumnoDTO {
 
     private Integer edad;
 
-    private AlumnoNivel alumnoNivel;
+    private String alumnoNivel;
 
 
 }
