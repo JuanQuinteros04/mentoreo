@@ -1,12 +1,12 @@
 package com.mentoresalumnos.service;
 
 import com.mentoresalumnos.exceptions.NotFoundException;
-import com.mentoresalumnos.model.Alumno;
+import com.mentoresalumnos.model.Student;
 import com.mentoresalumnos.model.Mentor;
 import com.mentoresalumnos.model.dtos.MentorDTO;
 import com.mentoresalumnos.model.dtos.MentorResponse;
-import com.mentoresalumnos.model.mappers.MentorMapper;
-import com.mentoresalumnos.persistence.AlumnoRepository;
+import com.mentorsstudents.model.mappers.MentorMapper;
+import com.mentoresalumnos.persistence.StudentRepository;
 import com.mentoresalumnos.persistence.MentorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,7 +21,7 @@ public class MentorServiceImpl implements MentorService{
     private MentorRepository mentorRepository;
 
     @Autowired
-    private AlumnoRepository alumnoRepository;
+    private StudentRepository studentRepository;
 
     MentorMapper mentorMapper = MentorMapper.INSTANCE;
 
@@ -50,17 +50,17 @@ public class MentorServiceImpl implements MentorService{
         Mentor mentor = mentorRepository.findById(id).orElseThrow(NotFoundException::new);
 
 
-        if (mentorDTO.getNombre() != null) {
-            mentor.setNombre(mentorDTO.getNombre());
+        if (mentorDTO.getAge() != null) {
+            mentor.setName(mentorDTO.getName());
         }
-        if (mentorDTO.getApellido() != null) {
-            mentor.setApellido(mentorDTO.getApellido());
+        if (mentorDTO.getLastName() != null) {
+            mentor.setLastName(mentorDTO.getLastName());
         }
-        if (mentorDTO.getEdad() != null) {
-            mentor.setEdad(mentorDTO.getEdad());
+        if (mentorDTO.getAge() != null) {
+            mentor.setAge(mentorDTO.getAge());
         }
-        if (mentorDTO.getTiempoExperiencia() != null) {
-            mentor.setTiempoExperiencia(mentorDTO.getTiempoExperiencia());
+        if (mentorDTO.getExperienceTime() != null) {
+            mentor.setExperienceTime(mentorDTO.getExperienceTime());
         }
 
         mentorRepository.save(mentor);
@@ -72,12 +72,12 @@ public class MentorServiceImpl implements MentorService{
     }
 
     @Override
-    public void addAlumno(Long mentorId, Long alumnoId) {
+    public void addStudent(Long mentorId, Long studentId) {
         Mentor mentor = mentorRepository.findById(mentorId).orElseThrow(NotFoundException::new);
-        Alumno alumno = alumnoRepository.findById(alumnoId).orElseThrow(NotFoundException::new);
+        Student student = studentRepository.findById(studentId).orElseThrow(NotFoundException::new);
 
-        if(mentor.getAlumnos().size() < 3){
-            mentor.getAlumnos().add(alumno);
+        if(mentor.getStudents().size() < 3){
+            mentor.getStudents().add(student);
 
             mentorRepository.save(mentor);
         }else throw new RuntimeException("El limite de alumnos es 3. Lo sentimos.");

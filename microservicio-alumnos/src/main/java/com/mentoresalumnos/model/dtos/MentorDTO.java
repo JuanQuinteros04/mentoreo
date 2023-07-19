@@ -1,6 +1,5 @@
 package com.mentoresalumnos.model.dtos;
 
-import com.mentoresalumnos.model.Alumno;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,13 +11,12 @@ import lombok.Setter;
 @AllArgsConstructor
 public class MentorDTO {
 
-    private String nombre;
+    private String name;
 
-    private String apellido;
+    private String lastName;
 
-    private Integer edad;
+    private Integer age;
 
-    private Integer tiempoExperiencia;
-
+    private Integer experienceTime;
 
 }

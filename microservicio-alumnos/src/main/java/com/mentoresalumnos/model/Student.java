@@ -6,39 +6,39 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name = "alumnos")
+@Table(name = "students")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Alumno {
+public class Student {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "nombre", nullable = false, unique = true)
-    private String nombre;
+    private String name;
 
     @Column(name = "apellido")
-    private String apellido;
+    private String lastName;
 
     @Column(name = "edad")
-    private Integer edad;
+    private Integer age;
 
     @Column(name = "nivel")
-    private String alumnoNivel;
+    private String studentLevel;
 
     @Column(name = "cantidad_mentores")
-    private Integer cantidadMentores;
+    private Integer numberMentors;
 
     @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "alumno_mentor",
-            joinColumns = @JoinColumn(name = "alumno_id"),
+    @JoinTable(name = "student_mentor",
+            joinColumns = @JoinColumn(name = "student_id"),
             inverseJoinColumns = @JoinColumn(name = "mentor_id"),
-            uniqueConstraints = {@UniqueConstraint(columnNames = {"alumno_id", "mentor_id"})}
+            uniqueConstraints = {@UniqueConstraint(columnNames = {"student_id", "mentor_id"})}
     )
-    private List<Mentor> mentores;
+    private List<Mentor> mentors;
 
 
 }

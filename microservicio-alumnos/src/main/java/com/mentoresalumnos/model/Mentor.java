@@ -9,7 +9,7 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name = "mentores")
+@Table(name = "mentors")
 @Getter
 @Setter
 @AllArgsConstructor
@@ -21,18 +21,18 @@ public class Mentor {
     private Long id;
 
     @Column(name = "nombre")
-    private String nombre;
+    private String name;
 
     @Column(name = "apellido")
-    private String apellido;
+    private String lastName;
 
     @Column(name = "edad")
-    private Integer edad;
+    private Integer age;
 
     @Column(name = "tiempo_experiencia")
-    private Integer tiempoExperiencia;
+    private Integer experienceTime;
 
-    @ManyToMany(mappedBy = "mentores")
-    private List<Alumno> alumnos;
+    @ManyToMany(mappedBy = "mentors")
+    private List<Student> students;
 
 }

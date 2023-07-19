@@ -1,4 +1,4 @@
-package com.mentoresalumnos.model.mappers;
+package com.mentorsstudents.model.mappers;
 
 import com.mentoresalumnos.model.Mentor;
 import com.mentoresalumnos.model.dtos.MentorDTO;
@@ -13,7 +13,7 @@ public interface MentorMapper {
     MentorMapper INSTANCE = Mappers.getMapper(MentorMapper.class);
 
     @Mapping(target = "id", ignore = true)
-    @Mapping(target = "alumnos", ignore = true)
+    @Mapping(target = "students", ignore = true)
     Mentor mentorDTOToMentor(MentorDTO mentorDTO);
 
 

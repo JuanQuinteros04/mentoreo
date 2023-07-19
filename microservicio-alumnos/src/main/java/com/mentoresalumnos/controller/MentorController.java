@@ -12,7 +12,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import java.net.URI;
 import java.util.List;
 
-@RequestMapping("/mentores")
+@RequestMapping("/mentors")
 @RestController
 public class MentorController {
 
@@ -55,9 +55,9 @@ public class MentorController {
         return ResponseEntity.status(204).build();
     }
 
-    @PutMapping(value = "/add/{id}/alumno/{idAlumno}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Void> addAlumno(@PathVariable("id") Long id, @PathVariable("idAlumno") Long idAlumno ){
-        mentorService.addAlumno(id,idAlumno);
+    @PutMapping(value = "/add/{id}/student/{idStudent}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Void> addStudent(@PathVariable("id") Long id, @PathVariable("idStudent") Long idStudent ){
+        mentorService.addStudent(id,idStudent);
         return ResponseEntity.status(204).build();
     }
 

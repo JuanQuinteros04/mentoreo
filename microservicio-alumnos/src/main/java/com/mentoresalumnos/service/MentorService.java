@@ -17,6 +17,6 @@ public interface MentorService {
 
     void deleteMentor(Long id);
 
-    void addAlumno(Long mentorId,Long alumnoId);
+    void addStudent(Long mentorId,Long studentId);
 
 }
