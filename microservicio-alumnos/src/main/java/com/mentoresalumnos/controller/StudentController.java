@@ -12,6 +12,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 @RefreshScope
 @RequestMapping("/students")
@@ -27,7 +28,14 @@ public class StudentController {
     }
 
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<StudentResponse> findById(@PathVariable("id") Long id){
+    public ResponseEntity<StudentResponse> findById(@PathVariable("id") Long id) throws InterruptedException {
+        if(id.equals(5L)){
+            throw new IllegalStateException("Producto no encontrado!");
+        }
+
+        if(id.equals(3L)){
+            TimeUnit.SECONDS.sleep(4L);
+        }
         return ResponseEntity.ok(studentService.findById(id));
     }
 
