@@ -4,6 +4,7 @@ import com.mentoresalumnos.model.dtos.MentorDTO;
 import com.mentoresalumnos.model.dtos.MentorResponse;
 import com.mentoresalumnos.service.MentorService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,6 +13,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import java.net.URI;
 import java.util.List;
 
+@RefreshScope
 @RequestMapping("/mentors")
 @RestController
 public class MentorController {
