@@ -17,19 +17,19 @@ public class Student {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "nombre", nullable = false, unique = true)
+    @Column(name = "name", nullable = false, unique = true)
     private String name;
 
-    @Column(name = "apellido")
+    @Column(name = "last_name")
     private String lastName;
 
-    @Column(name = "edad")
+    @Column(name = "age")
     private Integer age;
 
-    @Column(name = "nivel")
+    @Column(name = "level")
     private String studentLevel;
 
-    @Column(name = "cantidad_mentores")
+    @Column(name = "number_mentors")
     private Integer numberMentors;
 
     @ManyToMany(fetch = FetchType.LAZY)
