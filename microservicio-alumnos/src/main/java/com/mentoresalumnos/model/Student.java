@@ -26,7 +26,7 @@ public class Student {
     @Column(name = "age")
     private Integer age;
 
-    @Column(name = "level")
+    @Column(name = "student_level")
     private String studentLevel;
 
     @Column(name = "number_mentors")
