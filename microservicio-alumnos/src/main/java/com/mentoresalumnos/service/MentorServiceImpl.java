@@ -62,6 +62,9 @@ public class MentorServiceImpl implements MentorService{
         if (mentorDTO.getExperienceTime() != null) {
             mentor.setExperienceTime(mentorDTO.getExperienceTime());
         }
+        if (mentorDTO.getLocation() != null) {
+            mentor.setLocation(mentorDTO.getLocation());
+        }
 
         mentorRepository.save(mentor);
     }
