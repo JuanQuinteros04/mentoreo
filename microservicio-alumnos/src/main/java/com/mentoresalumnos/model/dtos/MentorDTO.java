@@ -19,4 +19,6 @@ public class MentorDTO {
 
     private Integer experienceTime;
 
+    private String location;
+
 }
