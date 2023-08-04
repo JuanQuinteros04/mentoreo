@@ -1,4 +1,4 @@
-package com.mentorsstudents.model.mappers;
+package com.mentoresalumnos.model.mappers;
 
 import com.mentoresalumnos.model.Mentor;
 import com.mentoresalumnos.model.dtos.MentorDTO;
