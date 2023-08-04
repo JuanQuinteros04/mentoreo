@@ -5,7 +5,7 @@ import com.mentoresalumnos.model.Student;
 import com.mentoresalumnos.model.Mentor;
 import com.mentoresalumnos.model.dtos.MentorDTO;
 import com.mentoresalumnos.model.dtos.MentorResponse;
-import com.mentorsstudents.model.mappers.MentorMapper;
+import com.mentoresalumnos.model.mappers.MentorMapper;
 import com.mentoresalumnos.persistence.StudentRepository;
 import com.mentoresalumnos.persistence.MentorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
