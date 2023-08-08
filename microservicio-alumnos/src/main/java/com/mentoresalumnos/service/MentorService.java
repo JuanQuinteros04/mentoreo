@@ -11,6 +11,8 @@ public interface MentorService {
 
     MentorResponse findById(Long id);
 
+    List<MentorResponse> findByLocationContaining(String location);
+
     MentorResponse createMentor(MentorDTO mentorDTO);
 
     void update(Long id, MentorDTO mentorDTO);

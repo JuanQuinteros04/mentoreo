@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.ws.rs.Path;
 import java.net.URI;
 import java.util.List;
 
@@ -29,6 +30,11 @@ public class MentorController {
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<MentorResponse> findById(@PathVariable("id") Long id){
         return ResponseEntity.ok(mentorService.findById(id));
+    }
+
+    @GetMapping(value = "/location/{location}", produces = MediaType.APPLICATION_JSON_VALUE)
+    ResponseEntity<List<MentorResponse>> findAllByLocation(@PathVariable("location") String location){
+        return ResponseEntity.ok(mentorService.findByLocationContaining(location));
     }
 
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)

@@ -39,6 +39,11 @@ public class MentorServiceImpl implements MentorService{
     }
 
     @Override
+    public List<MentorResponse> findByLocationContaining(String location){
+        return mentorRepository.findByLocationContaining(location).stream().map(mentor -> mentorMapper.mentorToMentorResponse(mentor)).collect(Collectors.toList());
+    }
+
+    @Override
     public MentorResponse createMentor(MentorDTO mentorDTO) {
         Mentor mentor = mentorMapper.mentorDTOToMentor(mentorDTO);
         mentorRepository.save(mentor);
