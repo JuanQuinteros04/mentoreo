@@ -6,6 +6,7 @@ import com.mentoresalumnos.model.dtos.StudentResponse;
 import com.mentoresalumnos.persistence.StudentRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
@@ -15,6 +16,7 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
@@ -75,6 +77,42 @@ public class StudentServiceImplTest {
         assertEquals(STUDENT_LASTNAME, studentResponse.getLastName());
         assertEquals(STUDENT_AGE, studentResponse.getAge());
         assertEquals(STUDENT_LEVEL, studentResponse.getStudentLevel());
+    }
+
+    @Test
+    public void createStudent(){
+        when(studentRepository.save(any(Student.class))).thenReturn(getStudent(STUDENT_ID, STUDENT_NAME,STUDENT_LASTNAME, STUDENT_AGE, STUDENT_LEVEL, NUMBER_MENTORS));
+        StudentResponse studentResponse = studentService.createAlumno(getStudentDTO(STUDENT_NAME2,STUDENT_LASTNAME2, STUDENT_AGE2, STUDENT_LEVEL2));
+
+        ArgumentCaptor<Student> argumentCaptorStudent = ArgumentCaptor.forClass(Student.class);
+
+        verify(studentRepository, times(1)).save(argumentCaptorStudent.capture());
+
+        Student student = argumentCaptorStudent.getValue();
+
+        assertNull(student.getId());
+        assertEquals(STUDENT_NAME2, student.getName());
+        assertEquals(STUDENT_LASTNAME2, student.getLastName());
+        assertEquals(STUDENT_AGE2, student.getAge());
+        assertEquals(STUDENT_LEVEL2, student.getStudentLevel());
+    }
+
+    @Test
+    void updateStudent(){
+        when(studentRepository.findById(anyLong())).thenReturn(Optional.of(getStudent(STUDENT_ID, STUDENT_NAME,STUDENT_LASTNAME, STUDENT_AGE, STUDENT_LEVEL, NUMBER_MENTORS)));
+        studentService.update(anyLong(), getStudentDTO(STUDENT_NAME2,STUDENT_LASTNAME2, STUDENT_AGE2, STUDENT_LEVEL2));
+
+        ArgumentCaptor<Student> argumentCaptorStudent = ArgumentCaptor.forClass(Student.class);
+
+        verify(studentRepository, times(1)).findById(anyLong());
+        verify(studentRepository, times(1)).save(argumentCaptorStudent.capture());
+
+        Student student = argumentCaptorStudent.getValue();
+
+        assertEquals(STUDENT_NAME2, student.getName());
+        assertEquals(STUDENT_LASTNAME2, student.getLastName());
+        assertEquals(STUDENT_AGE2, student.getAge());
+        assertEquals(STUDENT_LEVEL2, student.getStudentLevel());
     }
 
     private Student getStudent(Long id, String name, String lastName, int age, String studentLevel, int numberMentors){
