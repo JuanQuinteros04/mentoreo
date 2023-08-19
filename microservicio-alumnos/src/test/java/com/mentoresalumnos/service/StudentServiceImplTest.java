@@ -46,12 +46,19 @@ public class StudentServiceImplTest {
     private static final List<Mentor> MENTORS2 = new ArrayList<>();
 
     private static final Long MENTOR_ID = 1L;
-
     private static final String MENTOR_NAME = "Francisco";
     private static final String MENTOR_LASTNAME = "Busleiman";
     private static final int MENTOR_AGE = 34;
     private static final int MENTOR_EXPERIENCIE_TIME  = 2;
     private static final String MENTOR_LOCATION  = "Cordoba, Argentina";
+
+
+    private static final Long MENTOR_ID2 = 2L;
+    private static final String MENTOR_NAME2 = "Federico";
+    private static final String MENTOR_LASTNAME2 = "Signorelli";
+    private static final int MENTOR_AGE2 = 24;
+    private static final int MENTOR_EXPERIENCIE_TIME2  = 1;
+    private static final String MENTOR_LOCATION2  = "Buenos Aires, Argentina";
 
 
     @InjectMocks
@@ -154,9 +161,19 @@ public class StudentServiceImplTest {
         when(mentorRepository.findById(anyLong())).thenReturn(Optional.of(getMentor(MENTOR_ID, MENTOR_NAME, MENTOR_LASTNAME, MENTOR_AGE, MENTOR_EXPERIENCIE_TIME, MENTOR_LOCATION)));
         studentService.addMentor(STUDENT_ID, MENTOR_ID);
 
+        ArgumentCaptor<Student> studentArgumentCaptor = ArgumentCaptor.forClass(Student.class);
+
         verify(studentRepository, times(1)).findById(anyLong());
         verify(mentorRepository, times(1)).findById(anyLong());
+        verify(studentRepository, times(1)).save(studentArgumentCaptor.capture());
 
+        Student student = studentArgumentCaptor.getValue();
+
+        assertEquals(MENTOR_NAME, student.getMentors().get(0).getName());
+        assertEquals(MENTOR_LASTNAME, student.getMentors().get(0).getLastName());
+        assertEquals(MENTOR_AGE, student.getMentors().get(0).getAge());
+        assertEquals(MENTOR_EXPERIENCIE_TIME, student.getMentors().get(0).getExperienceTime());
+        assertEquals(MENTOR_LOCATION, student.getMentors().get(0).getLocation());
     }
 
 
@@ -170,7 +187,6 @@ public class StudentServiceImplTest {
                 .numberMentors(numberMentors)
                 .mentors(mentor)
                 .build();
-
     }
 
     private StudentDTO getStudentDTO(String name, String lastName, int age, String studentLevel){
@@ -204,5 +220,4 @@ public class StudentServiceImplTest {
                 .location(location)
                 .build();
     }
-
 }
