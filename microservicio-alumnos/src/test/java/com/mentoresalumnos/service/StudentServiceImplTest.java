@@ -1,6 +1,5 @@
 package com.mentoresalumnos.service;
 
-import com.google.common.base.Verify;
 import com.mentoresalumnos.exceptions.NotFoundException;
 import com.mentoresalumnos.model.Mentor;
 import com.mentoresalumnos.model.Student;
@@ -25,12 +24,11 @@ import static org.mockito.Mockito.*;
 @ExtendWith(MockitoExtension.class)
 public class StudentServiceImplTest {
     @Mock
-    StudentRepository studentRepository;
+    private StudentRepository studentRepository;
 
     @Mock
-    MentorRepository mentorRepository;
+    private MentorRepository mentorRepository;
     private static final Long STUDENT_ID = 1L;
-
     private static final String STUDENT_NAME = "Juan";
     private static final String STUDENT_LASTNAME = "Quinteros";
     private static final int STUDENT_AGE = 23;
@@ -57,10 +55,7 @@ public class StudentServiceImplTest {
 
 
     @InjectMocks
-    StudentServiceImpl studentService;
-
-    @InjectMocks
-    MentorServiceImpl mentorService;
+    private StudentServiceImpl studentService;
 
 
     @Test
