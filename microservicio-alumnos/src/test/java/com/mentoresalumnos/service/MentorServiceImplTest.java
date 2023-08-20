@@ -1,5 +1,6 @@
 package com.mentoresalumnos.service;
 
+import com.mentoresalumnos.exceptions.NotFoundException;
 import com.mentoresalumnos.model.Mentor;
 import com.mentoresalumnos.model.Student;
 import com.mentoresalumnos.model.dtos.MentorDTO;
@@ -19,6 +20,7 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.*;
 
@@ -94,6 +96,11 @@ public class MentorServiceImplTest {
     }
 
     @Test
+    public void findByIdNotFound(){
+        when(mentorRepository.findById(anyLong())).thenReturn(Optional.empty());
+        assertThrows(NotFoundException.class, () -> mentorService.findById(STUDENT_ID2));
+    }
+    @Test
     public void createMentor(){
         when(mentorRepository.save(any(Mentor.class))).thenReturn(getMentor(MENTOR_ID, MENTOR_NAME, MENTOR_LASTNAME, MENTOR_AGE, MENTOR_EXPERIENCIE_TIME, MENTOR_LOCATION, STUDENTS));
         MentorResponse mentorResponse = mentorService.createMentor(getMentorDTO(MENTOR_NAME, MENTOR_LASTNAME, MENTOR_AGE, MENTOR_EXPERIENCIE_TIME, MENTOR_LOCATION));
@@ -128,6 +135,50 @@ public class MentorServiceImplTest {
         assertEquals(MENTOR_AGE2, mentor.getAge());
         assertEquals(MENTOR_EXPERIENCIE_TIME2, mentor.getExperienceTime());
         assertEquals(MENTOR_LOCATION2, mentor.getLocation());
+    }
+
+    @Test
+    public void deleteMentor(){
+        when(mentorRepository.findById(anyLong())).thenReturn(Optional.of(getMentor(MENTOR_ID, MENTOR_NAME, MENTOR_LASTNAME, MENTOR_AGE, MENTOR_EXPERIENCIE_TIME, MENTOR_LOCATION, STUDENTS)));
+        mentorService.deleteMentor(MENTOR_ID2);
+
+        verify(mentorRepository, times(1)).findById(anyLong());
+        verify(mentorRepository, times(1)).delete(any(Mentor.class));
+
+    }
+
+    @Test
+    public void deleteNotFound(){
+        when(mentorRepository.findById(anyLong())).thenReturn(Optional.empty());
+        assertThrows(NotFoundException.class, () -> mentorService.deleteMentor(MENTOR_ID));
+    }
+
+    @Test
+    public void addStudent(){
+        when(mentorRepository.findById(anyLong())).thenReturn(Optional.of(getMentor(MENTOR_ID, MENTOR_NAME, MENTOR_LASTNAME, MENTOR_AGE, MENTOR_EXPERIENCIE_TIME, MENTOR_LOCATION, STUDENTS)));
+        when(studentRepository.findById(anyLong())).thenReturn(Optional.of(getStudent(STUDENT_ID2, STUDENT_NAME2, STUDENT_LASTNAME2, STUDENT_AGE2, STUDENT_LEVEL2)));
+        mentorService.addStudent(MENTOR_ID, STUDENT_ID2);
+
+        ArgumentCaptor<Mentor> mentorArgumentCaptor = ArgumentCaptor.forClass(Mentor.class);
+
+        verify(mentorRepository, times(1)).findById(anyLong());
+        verify(studentRepository, times(1)).findById(anyLong());
+        verify(mentorRepository, times(1)).save(any(Mentor.class));
+
+        Mentor mentor = mentorArgumentCaptor.getValue();
+
+        assertEquals(STUDENT_ID2, mentor.getStudents().get(0).getId());
+        assertEquals(STUDENT_NAME2, mentor.getStudents().get(0).getName());
+        assertEquals(STUDENT_LASTNAME2, mentor.getStudents().get(0).getLastName());
+        assertEquals(STUDENT_AGE2, mentor.getStudents().get(0).getAge());
+        assertEquals(STUDENT_LEVEL2, mentor.getStudents().get(0).getStudentLevel());
+        assertEquals(MENTOR_ID, mentor.getId());
+        assertEquals(MENTOR_NAME, mentor.getName());
+        assertEquals(MENTOR_LASTNAME, mentor.getLastName());
+        assertEquals(MENTOR_AGE, mentor.getAge());
+        assertEquals(MENTOR_EXPERIENCIE_TIME, mentor.getExperienceTime());
+        assertEquals(MENTOR_LOCATION, mentor.getLocation());
+
     }
 
 
@@ -165,15 +216,13 @@ public class MentorServiceImplTest {
         return mentors;
     }
 
-    private Student getStudent(Long id, String name, String lastName, int age, String studentLevel, int numberMentors, List<Mentor> mentor){
+    private Student getStudent(Long id, String name, String lastName, int age, String studentLevel){
         return Student.builder()
                 .id(id)
                 .name(name)
                 .lastName(lastName)
                 .age(age)
                 .studentLevel(studentLevel)
-                .numberMentors(numberMentors)
-                .mentors(mentor)
                 .build();
     }
 }
