@@ -53,14 +53,6 @@ public class StudentServiceImplTest {
     private static final String MENTOR_LOCATION  = "Cordoba, Argentina";
 
 
-    private static final Long MENTOR_ID2 = 2L;
-    private static final String MENTOR_NAME2 = "Federico";
-    private static final String MENTOR_LASTNAME2 = "Signorelli";
-    private static final int MENTOR_AGE2 = 24;
-    private static final int MENTOR_EXPERIENCIE_TIME2  = 1;
-    private static final String MENTOR_LOCATION2  = "Buenos Aires, Argentina";
-
-
     @InjectMocks
     private StudentServiceImpl studentService;
 
@@ -168,6 +160,12 @@ public class StudentServiceImplTest {
         verify(studentRepository, times(1)).save(studentArgumentCaptor.capture());
 
         Student student = studentArgumentCaptor.getValue();
+
+        assertEquals(STUDENT_ID, student.getId());
+        assertEquals(STUDENT_NAME, student.getName());
+        assertEquals(STUDENT_LASTNAME, student.getLastName());
+        assertEquals(STUDENT_AGE, student.getAge());
+        assertEquals(STUDENT_LEVEL, student.getStudentLevel());
 
         assertEquals(MENTOR_NAME, student.getMentors().get(0).getName());
         assertEquals(MENTOR_LASTNAME, student.getMentors().get(0).getLastName());
