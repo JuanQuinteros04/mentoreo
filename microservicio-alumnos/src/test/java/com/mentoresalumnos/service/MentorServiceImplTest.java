@@ -167,18 +167,17 @@ public class MentorServiceImplTest {
 
         Mentor mentor = mentorArgumentCaptor.getValue();
 
-        assertEquals(STUDENT_ID2, mentor.getStudents().get(0).getId());
-        assertEquals(STUDENT_NAME2, mentor.getStudents().get(0).getName());
-        assertEquals(STUDENT_LASTNAME2, mentor.getStudents().get(0).getLastName());
-        assertEquals(STUDENT_AGE2, mentor.getStudents().get(0).getAge());
-        assertEquals(STUDENT_LEVEL2, mentor.getStudents().get(0).getStudentLevel());
         assertEquals(MENTOR_ID, mentor.getId());
         assertEquals(MENTOR_NAME, mentor.getName());
         assertEquals(MENTOR_LASTNAME, mentor.getLastName());
         assertEquals(MENTOR_AGE, mentor.getAge());
         assertEquals(MENTOR_EXPERIENCIE_TIME, mentor.getExperienceTime());
         assertEquals(MENTOR_LOCATION, mentor.getLocation());
-
+        assertEquals(STUDENT_ID2, mentor.getStudents().get(0).getId());
+        assertEquals(STUDENT_NAME2, mentor.getStudents().get(0).getName());
+        assertEquals(STUDENT_LASTNAME2, mentor.getStudents().get(0).getLastName());
+        assertEquals(STUDENT_AGE2, mentor.getStudents().get(0).getAge());
+        assertEquals(STUDENT_LEVEL2, mentor.getStudents().get(0).getStudentLevel());
     }
 
 
